@@ -131,7 +131,7 @@
             <h5 class="my-0 mr-md-auto text-light font-weight-normal">SEAMCO</h5>
 
             <nav class="my-2 my-md-0 mr-md-3">
-                <a class="p-2 text-light" href="#">{{ auth()->user()->name }}</a>
+                <a class="p-2 text-light" href="#">{{ auth()->user()->fullName() }}</a>
 
             </nav>
             <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">

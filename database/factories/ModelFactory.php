@@ -12,14 +12,25 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
+
+$factory->define(App\Admin::class, function (Faker\Generator $faker) {
+
+    // We create a User model first before we create an Admin model.
+    $user = App\User::create([
+        'username' => $faker->unique()->username,
+        'password' => bcrypt('password'),
+        'type' => 'admin',      // admin or member
+        'remember_token' => str_random(10),
+    ]);
 
     return [
-        'name' => $faker->name,
+        'user_id' => $user->id,
         'email' => $faker->unique()->safeEmail,
-        'username' => $faker->unique()->username,
-        'password' => $password ?: $password = bcrypt('password'),
-        'remember_token' => str_random(10),
+        'first_name' => $faker->firstName,
+        'middle_name' => $faker->lastName,
+        'last_name' => $faker->lastName,
+        'contact_number' => $faker->numerify('09#########'),
+        'address' => $faker->address,
+        'position' => $faker->randomElement(['General Manager', 'Credit Committee', 'Chairman of the Baord', 'Programmer'])
     ];
 });
