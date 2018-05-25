@@ -27,7 +27,7 @@
         <div class="row justify-content-center">
 
             <div class="col-4">
-                <div class="card text-center" style="background: #eee">
+                <div class="card text-center">
                     <div class="card-body">
                         <h1 class="display-4">34</h1>
                         <span class="text-secondary">
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="card text-center" style="background: #eee">
+                <div class="card text-center">
                     <div class="card-body">
                         <h2 class="display-4">6</h2>
                         <span class="text-secondary">
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="card text-center" style="background: #eee">
+                <div class="card text-center">
                     <div class="card-body">
                         <h1 class="display-4">142,920</h1>
                         <span class="text-secondary">

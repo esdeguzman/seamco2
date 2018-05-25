@@ -11,7 +11,6 @@
         <style>
             body {
                 font-size: .875rem;
-                background-color: #eee;
             }
 
             .feather {
@@ -124,7 +123,7 @@
 
         <title>@yield('page-title')</title>
     </head>
-    <body>
+    <body class="bg-light">
 
         <!-- START HEADER -->
         <div class="d-flex flex-column fixed-top flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow" style="background: #346cb0">
