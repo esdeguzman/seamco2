@@ -55,6 +55,9 @@ class RegisterController extends Controller
             'birthday' => 'required',
             'gender' => 'required',
             'present_address' => 'required',
+            'username' => 'required|unique:users,username',
+            'password' => 'required|min:6|same:confirm_password',
+            'confirm_password' => 'required',
             'terms_and_condition' => 'required',
         ]);
     }
@@ -69,8 +72,8 @@ class RegisterController extends Controller
     {
         // Create User record for the member
         $user = User::create([
-            'username' => 'daniel' . rand(10, 1000),
-            'password' => bcrypt('password'),
+            'username' => $data['username'],
+            'password' => bcrypt($data['password']),
             'type' => 'member'
         ]);
 

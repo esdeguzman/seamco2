@@ -299,13 +299,36 @@
 
                         <hr class="mb-4">
 
+                        <h4 class="mb-3">Login Credentials</h4>
+
+                        <div class="mb-3">
+                            <label for="username">Username *</label>
+                            <input type="text" class="form-control" name="username" id="username" value="{{ old('username') }}">
+                            @if ($errors->has('username'))
+                                <small class="text-danger">* {{ $errors->first('username') }}</small><br>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <label for="password">Password *</label>
+                            <input type="password" class="form-control" name="password" id="password" value="">
+                            @if ($errors->has('password'))
+                                <small class="text-danger">* {{ $errors->first('password') }}</small><br>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirm_password">Confrim Password *</label>
+                            <input type="password" class="form-control" name="confirm_password" id="confirm_password" value="">
+                        </div>
+
+                        <hr class="mb-4">
+
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="terms" name="terms_and_condition" @if(old('terms_and_condition')) checked @endif>
                             <label class="custom-control-label" for="terms">
                                 I hereby state that I have read, understand and accept the terms and conditions above.
                             </label>
                             @if ($errors->has('terms_and_condition'))
-                                <small class="text-danger">* You must accept the Terms and Condition}</small><br>
+                                <small class="text-danger">* You must accept the Terms and Condition</small><br>
                             @endif
                         </div>
 
