@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Admin;
+use App\Member;
 
 class User extends Authenticatable
 {
@@ -24,6 +25,11 @@ class User extends Authenticatable
         return $this->hasOne(Admin::class, 'user_id');
     }
 
+    public function member()
+    {
+        return $this->hasOne(Member::class, 'user_id');
+    }
+
     /**
      * Returns the full name of the user depending of its type
      *
@@ -34,7 +40,7 @@ class User extends Authenticatable
         if ($this->isAdmin()) {
             return $this->admin->first_name . ' ' . $this->admin->last_name;
         } else {
-            return 'Member Name';
+            return $this->member->first_name . ' ' . $this->member->last_name;
         }
     }
 
