@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -48,9 +49,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'civil_status' => 'required',
+            'birthday' => 'required',
+            'gender' => 'required',
+            'present_address' => 'required',
+            'terms_and_condition' => 'required',
         ]);
     }
 
@@ -62,10 +67,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+        // Create User record for the member
+        $user = User::create([
+            'username' => 'daniel' . rand(10, 1000),
+            'password' => bcrypt('password'),
+            'type' => 'member'
         ]);
+
+        // Persist Member's Information
+        $member = $user->member()->create([
+            'first_name' => $data['first_name'],
+            'middle_name' => $data['middle_name'],
+            'last_name' => $data['last_name'],
+            'civil_status' => $data['civil_status'],
+            'birthday' => $data['birthday'],
+            'mobile_number' => $data['mobile_number'],
+            'gender' => $data['gender'],
+            'present_address' => $data['present_address'],
+            'permanent_address' => $data['permanent_address'],
+            'tax_identification_number' => $data['tax_identification_number'],
+            'employer' => $data['employer'],
+            'employer_address' => $data['employer_address'],
+            'position' => $data['position'],
+            'department' => $data['department'],
+            'employment_date' => $data['employment_date'],
+            'salary' => $data['salary'],
+            'other_source_of_income' => $data['other_source_of_income'],
+            'number_of_dependents' => $data['number_of_dependents'],
+        ]);
+
+        // Persist Membership Application
+        $member->membershipApplication()->create([]);
+
+        return $user;
     }
 }
