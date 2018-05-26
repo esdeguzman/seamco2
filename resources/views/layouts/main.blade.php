@@ -129,13 +129,22 @@
         <div class="d-flex flex-column fixed-top flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow" style="background: #346cb0">
             <h5 class="my-0 mr-md-auto text-light font-weight-normal">SEAMCO</h5>
 
-            <nav class="my-2 my-md-0 mr-md-3">
-                <a class="p-2 text-light" href="#">{{ auth()->user()->fullName() }}</a>
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a class="navbar-link text-light" href="/profile">
+                        <img src="/img/no-profile-image.png" width="30" height="30" class="d-inline-block rounded-circle mr-2" alt="">
+                        <span>
+                            {{ auth()->user()->fullName() }}
+                        </span>
+                    </a>
+                </li>
+            </ul>
 
-            </nav>
             <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
                 <span data-feather="log-out" style="color: white"></span>
             </a>
+
+
         </div>
         <!-- END HEADER -->
 
