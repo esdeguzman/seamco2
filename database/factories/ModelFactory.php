@@ -31,6 +31,7 @@ $factory->define(App\Admin::class, function (Faker\Generator $faker) {
         'last_name' => $faker->lastName,
         'contact_number' => $faker->numerify('09#########'),
         'address' => $faker->address,
-        'position' => $faker->randomElement(['General Manager', 'Credit Committee', 'Chairman of the Baord', 'Programmer'])
+        'position' => $faker->randomElement(['General Manager', 'Credit Committee', 'Chairman of the Board', 'Programmer']),
+        'photo_url' => $faker->imageUrl(100, 100),
     ];
 });
