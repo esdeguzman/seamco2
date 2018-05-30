@@ -53,4 +53,19 @@ class User extends Authenticatable
     {
         return $this->type == 'admin';
     }
+
+    /**
+     * Determines wether the user is Member
+     *
+     * @return boolean
+     */
+    public function isMember()
+    {
+        return $this->type == 'member';
+    }
+
+    public function isType($userType)
+    {
+        return $this->type == $userType;
+    }
 }
