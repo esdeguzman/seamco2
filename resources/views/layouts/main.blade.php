@@ -131,7 +131,7 @@
 
             <ul class="navbar-nav px-3">
                 <li class="nav-item text-nowrap">
-                    <a class="navbar-link text-light" href="/profile">
+                    <a class="navbar-link text-light" href="/admin/profile">
                         <img src="/img/no-profile-image.png" width="30" height="30" class="d-inline-block rounded-circle mr-2" alt="">
                         <span>
                             {{ auth()->user()->fullName() }}
@@ -209,11 +209,8 @@
                     </div>
                 </nav>
 
-                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                @yield('page-content')
 
-                    @yield('page-content')
-
-                </main>
             </div>
         </div>
         <!-- END SIDEBAR -->
@@ -256,6 +253,6 @@
             feather.replace()
         </script>
 
-        @yeild('scripts')
+        @yield('scripts')
     </body>
 </html>
