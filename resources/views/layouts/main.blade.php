@@ -155,31 +155,31 @@
                     <div class="sidebar-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" href="@if(auth()->user()->isAdmin()){{ route('admin.dashboard') }}@else{{ route('member.dashboard') }}@endif">
+                                <a class="nav-link @yield('nav-item-dashboard')" href="@if(auth()->user()->isAdmin()){{ route('admin.dashboard') }}@else{{ route('member.dashboard') }}@endif">
                                     <span data-feather="home"></span>
-                                    Dashboard <span class="sr-only">(current)</span>
+                                    Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link @yield('nav-item-members')" href="{{ route('admin.members') }}">
                                     <span data-feather="users"></span>
                                     Members
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link @yield('nav-item-loans')" href="#">
                                     <span data-feather="credit-card"></span>
                                     Loans
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link @yield('nav-item-reports')" href="#">
                                     <span data-feather="bar-chart-2"></span>
                                     Reports
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link @yield('nav-item-settings')" href="#">
                                     <span data-feather="settings"></span>
                                     Settings
                                 </a>

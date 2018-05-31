@@ -4,6 +4,10 @@
     Dashboard
 @endsection
 
+@section('nav-item-dashboard')
+    active
+@endsection
+
 @section('page-content')
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 

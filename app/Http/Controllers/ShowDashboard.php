@@ -14,6 +14,7 @@ class ShowDashboard extends Controller
      */
     public function __invoke()
     {
+        // Return the dashboard page for the user type.
         if (auth()->user()->isAdmin()) {
             return view('admin.dashboard');
         } else {
