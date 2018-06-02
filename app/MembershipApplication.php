@@ -13,6 +13,20 @@ class MembershipApplication extends Model
     protected $guarded = [];
     public $timestamps = false;
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'approved_at' => 'date',
+        'disapproved_at' => 'date',
+        'attended_pmes_at' => 'date',
+        'id_released_at' => 'date',
+        'fees_informed_at' => 'date',
+        'share_certificate_given_at' => 'date',
+    ];
+
     /*
     |--------------------------------------------------------------------------
     | Relationships
@@ -59,6 +73,26 @@ class MembershipApplication extends Model
     | Methods
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Return membership application status depending on 'disapproved_at' and
+     * 'approved_at' property
+     *
+     * @return string
+     */
+    public function status()
+    {
+        // if 'disapproved_at' has value means the application has been disapproved
+        if (! is_null($this->disapproved_at)) {
+            return 'disapproved';
+        }
+
+        if (! is_null($this->approved_at)) {
+            return 'approved';
+        } else {
+            return 'unapproved';
+        }
+    }
 
     /**
      * Approve the membership application. Returns false if the user is not admin.
@@ -121,24 +155,6 @@ class MembershipApplication extends Model
     }
 
     /**
-     * Mark id_released_at property. Returns false if the user is not admin.
-     *
-     * @return boolean
-     */
-    public function markIDAsReleased()
-    {
-        if (auth()->user()->isAdmin()) {
-            $this->update([
-                'id_released_at' => \Carbon\Carbon::now(),
-                'id_released_by' => auth()->user()->id
-            ]);
-
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Mark fees_informed_at property. Returns false if the user is not admin.
      *
      * @return boolean
@@ -149,6 +165,24 @@ class MembershipApplication extends Model
             $this->update([
                 'fees_informed_at' => \Carbon\Carbon::now(),
                 'fees_informed_by' => auth()->user()->id
+            ]);
+
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Mark id_released_at property. Returns false if the user is not admin.
+     *
+     * @return boolean
+     */
+    public function markIDAsReleased()
+    {
+        if (auth()->user()->isAdmin()) {
+            $this->update([
+                'id_released_at' => \Carbon\Carbon::now(),
+                'id_released_by' => auth()->user()->id
             ]);
 
             return true;
