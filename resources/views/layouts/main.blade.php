@@ -166,7 +166,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @yield('nav-item-members')" href="{{ route('admin.members') }}">
+                                <a class="nav-link @yield('nav-item-members')" href="{{ route('admin.members.index') }}">
                                     <span data-feather="users"></span>
                                     Members
                                 </a>
@@ -255,7 +255,10 @@
         <script src="{{ url('js/feather.js') }}"></script>
 
         <script>
-            feather.replace()
+            $(function() {
+                feather.replace()
+                $('[data-toggle="tooltip"]').tooltip()
+            })
         </script>
 
         @yield('scripts')
