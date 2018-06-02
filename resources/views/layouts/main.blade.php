@@ -133,7 +133,11 @@
             <ul class="navbar-nav px-3">
                 <li class="nav-item text-nowrap">
                     <a class="navbar-link text-light" href="/admin/profile">
-                        <img src="/img/no-profile-image.png" width="30" height="30" class="d-inline-block rounded-circle mr-2" alt="">
+                        @if (auth()->user()->isAdmin())
+                            <img src="{{ auth()->user()->admin->photo_url ?: '/img/no-profile-image.png' }}" width="30" height="30" class="d-inline-block rounded-circle mr-2" alt="">
+                        @else
+                            <img src="/img/no-profile-image.png" width="30" height="30" class="d-inline-block rounded-circle mr-2" alt="">
+                        @endif
                         <span>
                             {{ auth()->user()->fullName() }}
                         </span>
