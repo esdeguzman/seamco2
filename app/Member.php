@@ -47,4 +47,16 @@ class Member extends Model
     {
         return $this->hasOne(MembershipApplication::class, 'member_id');
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Methods
+    |--------------------------------------------------------------------------
+    */
+    public function fullName()
+    {
+        // We just call fullName method from the user model.
+        return $this->user->fullName();
+    }
 }
