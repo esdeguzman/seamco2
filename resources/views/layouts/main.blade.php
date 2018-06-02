@@ -11,6 +11,7 @@
         <style>
             body {
                 font-size: .875rem;
+                background-color: #eee;
             }
 
             .feather {
@@ -123,7 +124,7 @@
 
         <title>@yield('page-title')</title>
     </head>
-    <body class="bg-light">
+    <body>
 
         <!-- START HEADER -->
         <div class="d-flex flex-column fixed-top flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow" style="background: #346cb0">
@@ -132,7 +133,11 @@
             <ul class="navbar-nav px-3">
                 <li class="nav-item text-nowrap">
                     <a class="navbar-link text-light" href="/admin/profile">
-                        <img src="/img/no-profile-image.png" width="30" height="30" class="d-inline-block rounded-circle mr-2" alt="">
+                        @if (auth()->user()->isAdmin())
+                            <img src="{{ auth()->user()->admin->photo_url ?: '/img/no-profile-image.png' }}" width="30" height="30" class="d-inline-block rounded-circle mr-2" alt="">
+                        @else
+                            <img src="/img/no-profile-image.png" width="30" height="30" class="d-inline-block rounded-circle mr-2" alt="">
+                        @endif
                         <span>
                             {{ auth()->user()->fullName() }}
                         </span>
@@ -155,31 +160,31 @@
                     <div class="sidebar-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" href="@if(auth()->user()->isAdmin()){{ route('admin.dashboard') }}@else{{ route('member.dashboard') }}@endif">
+                                <a class="nav-link @yield('nav-item-dashboard')" href="@if(auth()->user()->isAdmin()){{ route('admin.dashboard') }}@else{{ route('member.dashboard') }}@endif">
                                     <span data-feather="home"></span>
-                                    Dashboard <span class="sr-only">(current)</span>
+                                    Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link @yield('nav-item-members')" href="{{ route('admin.members.index') }}">
                                     <span data-feather="users"></span>
                                     Members
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link @yield('nav-item-loans')" href="#">
                                     <span data-feather="credit-card"></span>
                                     Loans
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link @yield('nav-item-reports')" href="#">
                                     <span data-feather="bar-chart-2"></span>
                                     Reports
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link @yield('nav-item-settings')" href="#">
                                     <span data-feather="settings"></span>
                                     Settings
                                 </a>
@@ -250,7 +255,10 @@
         <script src="{{ url('js/feather.js') }}"></script>
 
         <script>
-            feather.replace()
+            $(function() {
+                feather.replace()
+                $('[data-toggle="tooltip"]').tooltip()
+            })
         </script>
 
         @yield('scripts')

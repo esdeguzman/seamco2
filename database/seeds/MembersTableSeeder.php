@@ -1,0 +1,19 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use App\Member;
+
+class MembersTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        factory(Member::class, 54)->create()->each(function ($m) {
+            $m->membershipApplication()->create([]);
+        });
+    }
+}

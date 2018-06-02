@@ -19,4 +19,15 @@ class Admin extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Methods
+    |--------------------------------------------------------------------------
+    */
+    public function fullName()
+    {
+        return $this->user->fullName();
+    }
 }
