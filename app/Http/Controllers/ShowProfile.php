@@ -4,21 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ShowDashboard extends Controller
+class ShowProfile extends Controller
 {
     /**
-     * Show the dashboard for the given user.
+     * Show the profile for the given user.
      *
      * @param  int  $id
      * @return Response
      */
     public function __invoke()
     {
-        // Return the dashboard page for the user type.
+        // Return the profiole page for the user type.
         if (auth()->user()->isAdmin()) {
-            return view('admin.dashboard');
+            return view('admin.profile');
         } else {
-            return view('member.dashboard');
+            return view('member.profile');
         }
     }
 }

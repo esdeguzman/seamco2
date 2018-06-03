@@ -132,16 +132,21 @@
 
             <ul class="navbar-nav px-3">
                 <li class="nav-item text-nowrap">
-                    <a class="navbar-link text-light" href="/admin/profile">
-                        @if (auth()->user()->isAdmin())
+                    @if (auth()->user()->isAdmin())
+                        <a class="navbar-link text-light" href="{{ route('admin.profile') }}">
                             <img src="{{ auth()->user()->admin->photo_url ?: '/img/no-profile-image.png' }}" width="30" height="30" class="d-inline-block rounded-circle mr-2" alt="">
-                        @else
+                            <span>
+                                {{ auth()->user()->fullName() }}
+                            </span>
+                        </a>
+                    @else
+                        <a class="navbar-link text-light" href="{{ route('member.profile') }}">
                             <img src="/img/no-profile-image.png" width="30" height="30" class="d-inline-block rounded-circle mr-2" alt="">
-                        @endif
-                        <span>
-                            {{ auth()->user()->fullName() }}
-                        </span>
-                    </a>
+                            <span>
+                                {{ auth()->user()->fullName() }}
+                            </span>
+                        </a>
+                    @endif
                 </li>
             </ul>
 
@@ -158,59 +163,91 @@
             <div class="row">
                 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                     <div class="sidebar-sticky">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link @yield('nav-item-dashboard')" href="@if(auth()->user()->isAdmin()){{ route('admin.dashboard') }}@else{{ route('member.dashboard') }}@endif">
-                                    <span data-feather="home"></span>
-                                    Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @yield('nav-item-members')" href="{{ route('admin.members.index') }}">
-                                    <span data-feather="users"></span>
-                                    Members
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @yield('nav-item-loans')" href="#">
-                                    <span data-feather="credit-card"></span>
-                                    Loans
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @yield('nav-item-reports')" href="#">
-                                    <span data-feather="bar-chart-2"></span>
-                                    Reports
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @yield('nav-item-settings')" href="#">
-                                    <span data-feather="settings"></span>
-                                    Settings
-                                </a>
-                            </li>
-                        </ul>
+                        <!-- SIDEBAR CONTENT FOR ADMIN -->
+                        @if (auth()->user()->isAdmin())
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link @yield('nav-item-dashboard')" href="{{ route('admin.dashboard') }}">
+                                        <span data-feather="home"></span>
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @yield('nav-item-members')" href="{{ route('admin.members.index') }}">
+                                        <span data-feather="users"></span>
+                                        Members
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @yield('nav-item-loans')" href="#">
+                                        <span data-feather="credit-card"></span>
+                                        Loans
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @yield('nav-item-reports')" href="#">
+                                        <span data-feather="bar-chart-2"></span>
+                                        Reports
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @yield('nav-item-settings')" href="#">
+                                        <span data-feather="settings"></span>
+                                        Settings
+                                    </a>
+                                </li>
+                            </ul>
 
-                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                            <span>Saved reports</span>
-                            <a class="d-flex align-items-center text-muted" href="#">
-                                <span data-feather="plus-circle"></span>
-                            </a>
-                        </h6>
-                        <ul class="nav flex-column mb-2">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="file-text"></span>
-                                    Current month
+                            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                                <span>Saved reports</span>
+                                <a class="d-flex align-items-center text-muted" href="#">
+                                    <span data-feather="plus-circle"></span>
                                 </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="file-text"></span>
-                                    Last quarter
-                                </a>
-                            </li>
-                        </ul>
+                            </h6>
+                            <ul class="nav flex-column mb-2">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <span data-feather="file-text"></span>
+                                        Current month
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <span data-feather="file-text"></span>
+                                        Last quarter
+                                    </a>
+                                </li>
+                            </ul>
+                        @else
+                            <!-- SIDEBAR CONTENT FOR ADMIN -->
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link @yield('nav-item-dashboard')" href="{{ route('member.dashboard') }}">
+                                        <span data-feather="home"></span>
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @yield('nav-item-member-profile')" href="{{ route('member.profile') }}">
+                                        <span data-feather="user"></span>
+                                        Profile
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @yield('nav-item-member-loans')" href="#">
+                                        <span data-feather="credit-card"></span>
+                                        Loans
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @yield('nav-item-member-settings')" href="#">
+                                        <span data-feather="settings"></span>
+                                        Settings
+                                    </a>
+                                </li>
+                            </ul>
+                        @endif
+
                     </div>
                 </nav>
 

@@ -14,7 +14,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'user_type:admin']], 
 
     Route::get('dashboard', 'ShowDashboard')->name('admin.dashboard');
 
-    Route::get('profile', function () { return view('admin.profile'); });
+    Route::get('profile', 'ShowProfile')->name('admin.profile');
 
     // MemberController
     Route::get('members', 'Admin\MemberController@index')
@@ -40,7 +40,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'user_type:admin']], 
 
     Route::post('members/{member}/verify-give-share-certificate', 'Admin\MemberController@verifyGiveShareCertificate')
             ->name('admin.members.verify-give-share-certificate');
-            
+
 });
 
 
@@ -53,5 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'user_type:admin']], 
 Route::group(['prefix' => 'member', 'middleware' => ['web', 'user_type:member']], function () {
 
     Route::get('dashboard', 'ShowDashboard')->name('member.dashboard');
+
+    Route::get('profile', 'ShowProfile')->name('member.profile');
 
 });
