@@ -219,7 +219,7 @@
                                 </li>
                             </ul>
                         @else
-                            <!-- SIDEBAR CONTENT FOR ADMIN -->
+                            <!-- SIDEBAR CONTENT FOR MEMBER -->
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <a class="nav-link @yield('nav-item-dashboard')" href="{{ route('member.dashboard') }}">
@@ -234,7 +234,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link @yield('nav-item-member-loans')" href="#">
+                                    <a class="nav-link @yield('nav-item-member-loans')" href="{{ route('member.loans.index') }}">
                                         <span data-feather="credit-card"></span>
                                         Loans
                                     </a>
