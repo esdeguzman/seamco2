@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\MembershipApplication;
+use App\Loan;
 
 class Member extends Model
 {
@@ -46,6 +47,11 @@ class Member extends Model
     public function membershipApplication()
     {
         return $this->hasOne(MembershipApplication::class, 'member_id');
+    }
+
+    public function loans()
+    {
+        return $this->hasMany(Loan::class, 'member_id');
     }
 
 
