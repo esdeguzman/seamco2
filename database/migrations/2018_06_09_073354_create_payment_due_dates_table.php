@@ -19,7 +19,7 @@ class CreatePaymentDueDatesTable extends Migration
             $table->unsignedInteger('loan_id');
             $table->unsignedInteger('member_id');
             $table->date('due_date');
-            $table->decimal('20, 2');
+            $table->decimal('amount', 20, 2);
         });
     }
 

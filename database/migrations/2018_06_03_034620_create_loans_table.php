@@ -18,8 +18,8 @@ class CreateLoansTable extends Migration
             $table->unsignedInteger('member_id');
             $table->unsignedInteger('co_maker_id');
 
-            // Code format is: L[4-digit member id]-[4-digit loan id]
-            $table->string('code')->unique();
+            // Code format is: L[4-digit member id]-[4-digit co maker id]-[4-digit loan id]
+            $table->string('code')->unique()->nullable();
 
             // Possible Values: New, Processing, Aprpoved, Denied
             $table->string('status')->default('new');
@@ -47,7 +47,7 @@ class CreateLoansTable extends Migration
 
             // No of months to pay
             $table->tinyInteger('payment_terms');
-            $table->text('remarks');
+            $table->text('remarks')->nullable();
             $table->timestamps();
         });
     }
