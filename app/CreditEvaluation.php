@@ -11,6 +11,13 @@ class CreditEvaluation extends Model
     protected $table = 'credit_evaluations';
     protected $guarded = [];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = ['estimated_release_date' => 'date'];
+
 
     /*
     |--------------------------------------------------------------------------
