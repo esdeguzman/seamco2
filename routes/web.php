@@ -56,4 +56,16 @@ Route::group(['prefix' => 'member', 'middleware' => ['web', 'user_type:member']]
 
     Route::get('profile', 'ShowProfile')->name('member.profile');
 
+    // LoanController
+    Route::get('loans', 'Member\LoanController@index')
+            ->name('member.loans.index');
+
+    Route::get('loans/create', 'Member\LoanController@create')
+            ->name('member.loans.create');
+
+    Route::post('loans', 'Member\LoanController@store')
+            ->name('member.loans.store');
+
+    Route::get('loans/{loan}', 'Member\LoanController@show')
+            ->name('member.loans.show');
 });
